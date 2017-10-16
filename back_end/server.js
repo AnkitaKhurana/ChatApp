@@ -19,11 +19,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 // app.use(passport.initialize());
 
 // app.use(passport.session());
-console.log(require('./routes/api'));
-app.use('/api', require('./routes/api'));
 
-app.use('/', require('./routes/index'));
-// app.use('/', express.static(__dirname + "/public_static"));
+// app.use('/api', require('./routes/api'));
+var p = require('./routes/index');
+app.use('/',p );
+app.use('/', express.static(__dirname + "/public_static"));
 
 
 app.listen(3456, function () {
