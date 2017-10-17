@@ -9,16 +9,16 @@ const app = express();
 const expressSession = require('express-session');
 
 
-// const passport = require('./auth/passport');    //authentication, user
+const passport = require('./auth/passport');    //authentication, user
 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 
-// app.use(passport.initialize());
+app.use(passport.initialize());
 
-// app.use(passport.session());
+app.use(passport.session());
 
 
 app.use('/',require('./routes/index') );
@@ -26,6 +26,9 @@ app.use('/',require('./routes/index') );
 app.use('/api', require('./routes/api'));
 app.use('/', express.static(__dirname + "/public_static"));
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 app.listen(3456, function () {
     console.log("Server started on http://localhost:3456");
