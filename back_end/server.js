@@ -20,9 +20,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // app.use(passport.session());
 
-// app.use('/api', require('./routes/api'));
-var p = require('./routes/index');
-app.use('/',p );
+
+app.use('/',require('./routes/index') );
+
+app.use('/api', require('./routes/api'));
 app.use('/', express.static(__dirname + "/public_static"));
 
 
