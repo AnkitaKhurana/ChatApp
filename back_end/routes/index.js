@@ -31,5 +31,17 @@ route.get('/profile', eli('/'), (req, res) => {
     res.send(req.user);
 });
 
+route.post('/token', passport.authenticate('local'), (req, res) => {
+
+    AuthToken.create({
+        token: uid2(20),
+        userId: req.user.id
+    }).then((authToken) => {
+        return res.send({
+            token: authToken.token
+        })
+    })
+
+});
 
 module.exports = route;
