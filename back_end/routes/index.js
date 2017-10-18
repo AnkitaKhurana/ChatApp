@@ -1,6 +1,7 @@
-
+const eli = require('../auth/utils').eli;
 const route = require('express').Router();
 const User = require('../db/models').User;
+const passport = require('passport');
 
 route.get('/',(req,res)=>{
     res.render('index', { title: 'CHATAPP'});
