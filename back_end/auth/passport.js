@@ -41,6 +41,7 @@ passport.use(new LocalStrategy(
             bcrypt.compare(password, user.password, function(err, res) {
                 if(res==false)
                 {
+                    console.log('false');
                     return done(null, false, {message: 'Username or password was wrong'})
                 }
 
