@@ -4,8 +4,9 @@ const User = require('../db/models').User;
 const passport = require('passport');
 
 route.get('/',(req,res)=>{
-    res.render('index', { title: 'CHATAPP'});
     // res.send(req.user);
+    res.render('index', { title: 'CHATAPP'});
+
 });
 
 
@@ -30,7 +31,8 @@ route.post('/signup', (req, res) => {
 
 
 
-route.post('/login',passport.authenticate('local',{
+route.post('/check',passport.authenticate('local',{
+
     successRedirect:'/chatwindow',
     failureRedirect:'/'
 }));
@@ -47,12 +49,15 @@ route.get('/logout', (req, res) => {
 });
 
 
-route.get('/profile', eli('/'), (req, res) => {
+route.get('/profile', (req, res) => {
     res.send(req.user);
 });
 
-route.get('/chatwindow', eli('/'), (req, res) => {
-    res.render('chat', { title: 'CHATAPP'});
+
+
+route.get('/chatwindow', (req, res) => {
+
+    res.render('chat', { title: 'CHATwindow'});
 
 });
 
