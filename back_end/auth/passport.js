@@ -19,9 +19,6 @@ passport.deserializeUser(function (userKey, done) {
         done(err)
     })
 });
-// const saltRounds = 10;
-//
-// const myPlaintextPassword = 's0/\/\P4$$w0rD';
 
 
 passport.use(new LocalStrategy(
@@ -35,17 +32,15 @@ passport.use(new LocalStrategy(
             }
         }).then((user) => {
 
-            if(!user) {
-                return done(null, false, {message: 'Username or password was wrong'})
-            }
-            bcrypt.compare(password, user.password, function(err, res) {
-                if(res==false)
-                {
-                    console.log('false');
-                    return done(null, false, {message: 'Username or password was wrong'})
-                }
 
-            });
+                bcrypt.compare(password, user.password, function (err, res) {
+
+                    if (!user||res == false) {
+                        console.log('false');
+                        return done(null, false, {message: 'Username or password was wrong'})
+                    }
+
+                });
 
             return done(null, user);
 
