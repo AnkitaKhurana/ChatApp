@@ -7,7 +7,14 @@ const db = new Sequelize('ChatApp', 'root', '1234', {
     dialect: 'mysql'
 });
 
-
+const Msg = db.define('msg',{
+    id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    content : Sequelize.STRING
+})
 
 const User = db.define('user', {
     id: {
@@ -45,6 +52,6 @@ console.error(err);
 
 
 module.exports = {
-    User
+    User,Msg
 };
 

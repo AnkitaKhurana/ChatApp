@@ -2,9 +2,13 @@ const eli = require('../auth/utils').eli;
 const route = require('express').Router();
 const User = require('../db/models').User;
 const passport = require('passport');
+const msgsaved = require('../db/models').Msg;
+
+var msg='';
 
 route.get('/',(req,res)=>{
     // res.send(req.user);
+
     res.render('index', { title: 'CHATAPP'});
 
 });
@@ -45,15 +49,24 @@ route.get('/logout', (req, res) => {
     })
 });
 
+route.post('/addMessage',eli('/'),(req,res)=>{
+    // console.log('############');
+    // console.log(req.body.message);
+    // console.log('############');
+    msg+=(req.body.message);
+    res.redirect('/chatwindow/');
+
+});
+
 
 route.get('/chatwindow',eli('/'),(req,res)=>{
 
-    res.render('chat', { title: 'CHATAPP',username:req.user.username});
+        res.render('chat', { title: 'CHATAPP',username:req.user.username,messages:msg});
 
-})
+});
 
 route.get('/profile', (req, res) => {
-    console.log(req.user);
+    // console.log(req.user);
     res.send(req.user);
 
 });
