@@ -49,20 +49,20 @@ route.get('/logout', (req, res) => {
 });
 
 
+route.get('/chatwindow',eli('/'),(req,res)=>{
+
+    res.render('chat', { title: 'CHATAPP'});
+
+})
+
 route.get('/profile', (req, res) => {
-
+    console.log(req.user);
     res.send(req.user);
 
 });
 
 
 
-route.get('/chatwindow',eli('/'), (req, res) => {
-
-    res.send(req.user);
-    // res.render('chat', { title: 'CHATwindow'});
-
-});
 
 //
 // route.post('/token', passport.authenticate('local'), (req, res) => {

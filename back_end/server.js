@@ -15,6 +15,11 @@ const passport = require('./auth/passport');    //authentication, user
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.use(expressSession({
+    secret: 'my super secret',
+    resave: false,
+    saveUninitialized: false
+}));
 
 app.use(passport.initialize());
 
@@ -23,9 +28,9 @@ app.use(passport.session());
 
 app.use('/',require('./routes/index') );
 
-app.use('/api', require('./routes/api'));
 app.use('/', express.static(__dirname + "/public_static"));
 
+app.use('/api', require('./routes/api'));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
