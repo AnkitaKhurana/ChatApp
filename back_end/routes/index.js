@@ -26,12 +26,9 @@ route.post('/signup', (req, res) => {
     })
 });
 
-route.get('/chatwindow',passport.authenticate('local',{
-    res.render('chat', { title: 'CHATAPP'});
 
 
 
-}));
 
 route.post('/login',passport.authenticate('local',{
     successRedirect:'/chatwindow',
@@ -53,6 +50,12 @@ route.get('/logout', (req, res) => {
 route.get('/profile', eli('/'), (req, res) => {
     res.send(req.user);
 });
+
+route.get('/chatwindow', eli('/'), (req, res) => {
+    res.render('chat', { title: 'CHATAPP'});
+
+});
+
 
 route.post('/token', passport.authenticate('local'), (req, res) => {
 
