@@ -5,14 +5,36 @@ const passport = require('passport');
 
 route.get('/',(req,res)=>{
     res.render('index', { title: 'CHATAPP'});
-
     // res.send(req.user);
 });
 
 
+route.get('/signup',(req,res)=>{
+    res.render('signup', { title: 'CHATAPP'});
+});
+
+
+route.post('/signup', (req, res) => {
+    User.create({
+        username: req.body.username,
+        email: req.body.email,
+        //NEVER EVER DO THIS IS PRODUCTION
+        //PASSWORDS SHOULD BE HASHED
+        password: req.body.password
+    }).then((user) => {
+        res.redirect('/')
+    })
+});
+
+route.get('/chatwindow',passport.authenticate('local',{
+    res.render('chat', { title: 'CHATAPP'});
+
+
+
+}));
 
 route.post('/login',passport.authenticate('local',{
-    successRedirect:'/api/temp',
+    successRedirect:'/chatwindow',
     failureRedirect:'/'
 }));
 
