@@ -28,9 +28,6 @@ route.post('/signup', (req, res) => {
 });
 
 
-
-
-
 route.post('/login',passport.authenticate('local',{
 
     successRedirect:'/chatwindow/',
@@ -51,7 +48,7 @@ route.get('/logout', (req, res) => {
 
 route.get('/chatwindow',eli('/'),(req,res)=>{
 
-    res.render('chat', { title: 'CHATAPP'});
+    res.render('chat', { title: 'CHATAPP',username:req.user.username});
 
 })
 
