@@ -1,10 +1,18 @@
+const bcrypt = require('bcrypt');
 const eli = require('../auth/utils').eli;
 const route = require('express').Router();
 const User = require('../db/models').User;
 const passport = require('passport');
 const msgsaved = require('../db/models').Msg;
 
-var msg='';
+const saltRounds = 10;
+
+const myPlaintextPassword = 's0/\/\P4$$w0rD';
+
+
+
+
+let msg='';
 
 route.get('/',(req,res)=>{
     // res.send(req.user);
@@ -20,13 +28,19 @@ route.get('/signup',(req,res)=>{
 
 
 route.post('/signup', (req, res) => {
+
+
     User.create({
+
         username: req.body.username,
         email: req.body.email,
         //NEVER EVER DO THIS IS PRODUCTION
         //PASSWORDS SHOULD BE HASHED
-        password: req.body.password
+
+        password:  bcrypt.hashSync(req.body.password, saltRounds)
+
     }).then((user) => {
+        console.log(user.password);
         res.redirect('/')
     })
 });

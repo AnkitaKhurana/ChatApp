@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
@@ -18,6 +19,9 @@ passport.deserializeUser(function (userKey, done) {
         done(err)
     })
 });
+// const saltRounds = 10;
+//
+// const myPlaintextPassword = 's0/\/\P4$$w0rD';
 
 
 passport.use(new LocalStrategy(
@@ -25,14 +29,22 @@ passport.use(new LocalStrategy(
 
         User.findOne({
             where: {
-                username: username,
-                password: password
+                username: username
+                // bcrypt.compareSync(myPlaintextPassword, hash);password:password
+
             }
         }).then((user) => {
 
             if(!user) {
                 return done(null, false, {message: 'Username or password was wrong'})
             }
+            bcrypt.compare(password, user.password, function(err, res) {
+                if(res==false)
+                {
+                    return done(null, false, {message: 'Username or password was wrong'})
+                }
+
+            });
 
             return done(null, user);
 
