@@ -31,7 +31,7 @@ route.post('/signup', (req, res) => {
 
 
 
-route.post('/check',passport.authenticate('local',{
+route.post('/login',passport.authenticate('local',{
 
     successRedirect:'/chatwindow',
     failureRedirect:'/'
@@ -55,7 +55,7 @@ route.get('/profile', (req, res) => {
 
 
 
-route.get('/chatwindow', (req, res) => {
+route.get('/chatwindow',eli('/temp'), (req, res) => {
 
     res.render('chat', { title: 'CHATwindow'});
 
