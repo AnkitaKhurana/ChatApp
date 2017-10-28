@@ -33,7 +33,7 @@ route.post('/signup', (req, res) => {
 
 route.post('/login',passport.authenticate('local',{
 
-    successRedirect:'/chatwindow',
+    successRedirect:'/chatwindow/',
     failureRedirect:'/'
 }));
 
@@ -50,29 +50,32 @@ route.get('/logout', (req, res) => {
 
 
 route.get('/profile', (req, res) => {
+
     res.send(req.user);
-});
-
-
-
-route.get('/chatwindow',eli('/temp'), (req, res) => {
-
-    res.render('chat', { title: 'CHATwindow'});
 
 });
 
 
-route.post('/token', passport.authenticate('local'), (req, res) => {
 
-    AuthToken.create({
-        token: uid2(20),
-        userId: req.user.id
-    }).then((authToken) => {
-        return res.send({
-            token: authToken.token
-        })
-    })
+route.get('/chatwindow',eli('/'), (req, res) => {
+
+    res.send(req.user);
+    // res.render('chat', { title: 'CHATwindow'});
 
 });
+
+//
+// route.post('/token', passport.authenticate('local'), (req, res) => {
+//
+//     AuthToken.create({
+//         token: uid2(20),
+//         userId: req.user.id
+//     }).then((authToken) => {
+//         return res.send({
+//             token: authToken.token
+//         })
+//     })
+//
+// });
 
 module.exports = route;
