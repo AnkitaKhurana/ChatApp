@@ -12,11 +12,11 @@
 
 <form action="http://localhost:3456/addMessage" method="post">
 <label name="message" style="background-color: gold">
-<%= messages%>
-
+<%- messages%>
 </label>
     <!--<label name="who" value=`<%=username%>`></label>-->
     <input value="<%=username%>" name="NN"  style="display: none">
+    <br>
     <input placeholder="Write your message" name="newmessage">
 
 

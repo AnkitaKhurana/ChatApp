@@ -67,6 +67,8 @@ route.post('/addMessage',eli('/'),(req,res)=>{
 
      console.log(req.body.username);
     msg+='\n'+(req.body.NN)+': '+(req.body.newmessage);
+
+    msg = msg.replace(/\n/g, '<br/>');
     res.redirect('/chatwindow/');
 
 });
