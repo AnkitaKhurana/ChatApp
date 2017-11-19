@@ -38,3 +38,12 @@ app.set('view engine', 'ejs');
 app.listen(3456, function () {
     console.log("Server started on http://localhost:3456");
 });
+if(process.env.NODE_ENV !== 'production') {
+    process.once('uncaughtException', function(err) {
+        console.error('FATAL: Uncaught exception.');
+        console.error(err.stack||err);
+        setTimeout(function(){
+            process.exit(1);
+        }, 100);
+    });
+}

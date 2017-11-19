@@ -20,6 +20,8 @@ passport.deserializeUser(function (userKey, done) {
     })
 });
 
+// Plug-in Local Strategy
+
 
 passport.use(new LocalStrategy(
     function (username, password, done) {
@@ -32,15 +34,18 @@ passport.use(new LocalStrategy(
             }
         }).then((user) => {
 
-
+                if(user!=null)
                 bcrypt.compare(password, user.password, function (err, res) {
 
                     if (!user||res == false) {
                         console.log('false');
-                        return done(null, false, {message: 'Username or password was wrong'})
+                        return done(false, {message: 'Username or password was wrong'})
                     }
 
+
                 });
+                else
+                    return done(null, false, {message: 'Username or password was wrong'})
 
             return done(null, user);
 
