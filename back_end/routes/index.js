@@ -65,7 +65,8 @@ route.get('/logout', (req, res) => {
 
 route.post('/addMessage',eli('/'),(req,res)=>{
 
-    msg+=' '+(req.body.newmessage);
+     console.log(req.body.username);
+    msg+='\n'+(req.body.NN)+': '+(req.body.newmessage);
     res.redirect('/chatwindow/');
 
 });
