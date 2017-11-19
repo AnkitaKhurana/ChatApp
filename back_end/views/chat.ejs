@@ -11,10 +11,10 @@
 <h1>Welcome</h1><h2><%=username%></h2>
 
 <form action="http://localhost:3456/addMessage" method="post">
-<textarea  name="message">
+<label name="message">
 <%= messages%>
 
-</textarea>
+</label>
     <input placeholder="Write your message" name="newmessage">
     <input type="submit" value="Send">
 </form>
